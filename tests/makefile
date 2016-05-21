@@ -1,13 +1,12 @@
 CC=gcc
-CFLAGS=-I.
-DEPS = runtimeLinking.h
+CFLAGS=-I. -g
 
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+%.o: %.c
+	$(CC) -c -fPIC -o ../obj/$@ $< $(CFLAGS)
 
 %.so: %.c
-	$(CC) -shared -fPIC -o $@ $< $(CFLAGS)
+	$(CC) -shared -fPIC -o ../obj/$@ $< $(CFLAGS)
 
 make: runtimeLinkingTests.o testLibrary.so
-	cd .. && $(MAKE)
-	$(CC) -o runtimeLinkingTests runtimeLinkingTests.o ../runtimeLinking.o -ldl
+	cd ../src && $(MAKE)
+	$(CC) -o ../obj/runtimeLinkingTests ../obj/runtimeLinkingTests.o ../obj/runtimeLinking.o -ldl

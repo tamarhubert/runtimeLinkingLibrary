@@ -1,8 +1,8 @@
 CC=gcc
-CFLAGS=-I.
+CFLAGS=-I. -g
 DEPS = runtimeLinking.h
 
 %.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o ../obj/$@ $< $(CFLAGS)
 
 make: runtimeLinking.o
