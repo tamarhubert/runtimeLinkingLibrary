@@ -1,8 +1,17 @@
 #include "../src/runtimeLinking.h"
 #include <stdlib.h>
 #include <stdio.h>
+#ifdef _WIN32
+
+#define LIB "./testLibrary.dll"
+
+#elif __linux__
 
 #define LIB "./testLibrary.so"
+
+#else
+#   error "Unknown compiler"
+#endif
 
 int main(void){
     void* handle;
